@@ -1,4 +1,4 @@
-from pydantic import BaseModel
+from pydantic import BaseModel, Field
 from pydantic_settings import BaseSettings
 
 
@@ -15,14 +15,13 @@ class ApiPrefix(BaseModel):
     v1: ApiV1Prefix = ApiV1Prefix()
 
 
-class ApiSecretKey(BaseSettings):
+class ApiSecretKey(BaseModel):  # <- base model, не BaseSettings
     DEEPAI_API_URL: str
     DEEPAI_API_KEY: str
 
 
 class Settings(BaseSettings):
     SECRET_KEY: str
-
     api_key: ApiSecretKey = ApiSecretKey()
 
     run: RunConfig = RunConfig()
@@ -32,6 +31,5 @@ class Settings(BaseSettings):
         env_file = ".env"
         env_file_encoding = "utf-8"
         extra = "allow"
-
 
 settings = Settings()
