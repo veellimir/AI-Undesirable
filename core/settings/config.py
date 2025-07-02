@@ -16,7 +16,8 @@ class ApiPrefix(BaseModel):
 
 
 class ApiSecretKey(BaseSettings):
-    pass
+    DEEPAI_API_URL: str
+    DEEPAI_API_KEY: str
 
 
 class Settings(BaseSettings):
