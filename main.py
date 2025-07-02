@@ -5,8 +5,8 @@ from contextlib import asynccontextmanager
 from fastapi import FastAPI
 
 from core.settings import settings
+from api_v1 import router as api_router
 
-# from api_v1 import router as api_router
 
 @asynccontextmanager
 async def lifespan(app: FastAPI):
@@ -14,14 +14,14 @@ async def lifespan(app: FastAPI):
     yield
     # shutdown
 
+
 app = FastAPI(
     title="🎩 API Сервис модерации.",
     description="Сервер, который принимает изображение и отправляет его в бесплатный сервис модерации ",
     lifespan=lifespan,
 )
 
-# app.include_router(api_router)
-
+app.include_router(api_router)
 
 origins = [
     "http://localhost:5173",
